@@ -10,8 +10,8 @@ export class SidebarComponent {
   menuItems: any[];
 
   constructor(
-    private _sidebarSettings: SidebarService,
+    private _sidebarService: SidebarService,
   ) {
-    this.menuItems = _sidebarSettings.menu;
+    this.menuItems = _sidebarService.menu;
   }
 }
