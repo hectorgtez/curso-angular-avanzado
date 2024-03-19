@@ -1,26 +1,19 @@
 /**
- * Path: /api/todo/:busqueda
+ * Path: '/api/todo/'
  */
 
 const { Router } = require('express');
-const { check } = require('express-validator');
-
-const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJwt } = require('../middlewares/validar-jwt');
 
 const { 
   getTodo,
+  getDocumentosColeccion,
 } = require('../controllers/busquedas.controller');
 
 const router = Router();
 
 // Busqueda
-router.get(
-  '/:termino',
-  [
-    validarJwt,
-  ],
-  getTodo
-);
+router.get('/:busqueda', validarJwt, getTodo);
+router.get('/coleccion/:tabla/:busqueda', validarJwt, getDocumentosColeccion);
 
 module.exports = router;

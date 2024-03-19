@@ -1,5 +1,5 @@
 /**
- * Path: '/api/hospitales'
+ * Path: '/api/hospitales/'
  */
 
 const { Router } = require('express');
