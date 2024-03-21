@@ -38,13 +38,19 @@ router.post(
 // Editar medico
 router.put(
   '/:id',
-  [],
+  [
+    validarJwt,
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('hospital', 'El ID hospital debe ser válido').isMongoId(),
+    validarCampos,
+  ],
   actualizarMedico
 );
 
 // Borrar medico
 router.delete(
   '/:id',
+  validarJwt,
   borrarMedico
 );
 
