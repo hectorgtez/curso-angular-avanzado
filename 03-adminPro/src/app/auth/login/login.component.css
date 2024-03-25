@@ -48,3 +48,9 @@ Login register and recover password Page
     right: 0px;
     position: absolute;
     height: 100%; }
+
+.centrado {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
