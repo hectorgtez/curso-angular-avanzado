@@ -5,6 +5,11 @@
   animation-fill-mode: both;
 }
 
+.img-avatar {
+  width: 200px;
+  height: 200px;
+}
+
 #themecolors .selector, .cursor {
   cursor: pointer;
 }
