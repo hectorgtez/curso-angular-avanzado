@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 import { environment } from '../environments/environments';
 import { Usuario } from '../models/usuario.model';
+import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 import { RegisterForm } from '../interfaces/register-form.interfaces';
 import { LoginForm } from '../interfaces/login-form.interface';
 
@@ -31,6 +32,14 @@ export class UsuarioService {
 
   get uid(): string {
     return this.usuario.uid || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token,
+      }
+    }
   }
 
   logout() {
@@ -95,6 +104,31 @@ export class UsuarioService {
       .pipe(
         tap( (resp: any) => {
           localStorage.setItem('token', resp.token);
+        })
+      );
+  }
+
+  cargarUsuarios( from: number = 0 ) {
+    const url = `${ base_url }/usuarios?from=${ from }`;
+    return this._http.get<CargarUsuario>(url, this.headers)
+      .pipe(
+        map( resp  => {
+          const usuarios = resp.usuarios.map(
+            user => new Usuario(
+              user.nombre,
+              user.email,
+              '',
+              user.img,
+              user.google,
+              user.role!,
+              user.uid
+            )
+          )
+
+          return {
+            total: resp.total,
+            usuarios: usuarios,
+          };
         })
       );
   }

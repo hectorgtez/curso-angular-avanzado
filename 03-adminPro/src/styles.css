@@ -10,6 +10,15 @@
   height: 200px;
 }
 
+.w100 {
+  width: 100px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 30px;
+}
+
 #themecolors .selector, .cursor {
   cursor: pointer;
 }
