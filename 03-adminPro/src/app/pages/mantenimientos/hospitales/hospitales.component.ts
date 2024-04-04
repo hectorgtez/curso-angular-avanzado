@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Hospital } from '../../../models/hospital.model';
 import { HospitalService } from '../../../services/hospital.service';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
+import { BusquedasService } from '../../../services/busquedas.service';
 
 @Component({
   selector: 'app-hospitales',
@@ -14,14 +15,17 @@ import { ModalImagenService } from '../../../services/modal-imagen.service';
 })
 export class HospitalesComponent implements OnInit, OnDestroy {
   public hospitales: Hospital[];
+  public hospitalesTemp: Hospital[];
   public cargando: boolean;
   public imgSubs!: Subscription;
 
   constructor(
     private _hospitalService: HospitalService,
     private _modalImagenService: ModalImagenService,
+    private _busquedasService: BusquedasService,
   ) {
     this.hospitales = [];
+    this.hospitalesTemp = [];
     this.cargando = true;
   }
 
@@ -36,11 +40,23 @@ export class HospitalesComponent implements OnInit, OnDestroy {
     this.imgSubs.unsubscribe();
   }
 
+  buscar(termino: string) {
+    if (termino.length === 0) {
+      return this.hospitales = this.hospitalesTemp;
+    }
+
+    return this._busquedasService.buscar('hospitales', termino)
+      .subscribe( (resultados: any) => {
+        this.hospitales = resultados;
+      });
+  }
+
   cargarHospitales() {
     this.cargando = true;
     this._hospitalService.cargarHospitales()
       .subscribe( hospitales => {
         this.hospitales = hospitales;
+        this.hospitalesTemp = hospitales;
         this.cargando = false;
       });
   }
@@ -61,7 +77,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   }
 
   async abrirSweetAlert() {
-    const { value } = await Swal.fire<string>({
+    const { value = '' } = await Swal.fire<string>({
       title: 'Crear hospital',
       text: 'Ingrese el nombre del nuevo hospital',
       input: 'text',
