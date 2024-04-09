@@ -27,6 +27,7 @@ app.use('/api/todo', require('./routes/busquedas.routes'));
 app.use('/api/upload', require('./routes/uploads.routes'));
 app.use('/api/login', require('./routes/auth.routes'));
 
+// Lo ultimo
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
