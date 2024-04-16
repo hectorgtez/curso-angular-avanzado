@@ -2,14 +2,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RouterMedicoComponent } from './router-medico.component';
-import { EMPTY, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 class FakeRouter {
   navigate(params: any) { }
 }
 
 class FakeActivatedRoute {
-  // params: Observable<any> = EMPTY;
   private subject = new Subject();
 
   get params() {
