@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gotyApp": {
+    "goty-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gotyApp:build:production"
+              "buildTarget": "goty-app:build:production"
             },
             "development": {
-              "buildTarget": "gotyApp:build:development"
+              "buildTarget": "goty-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "gotyApp:build"
+            "buildTarget": "goty-app:build"
           }
         },
         "test": {

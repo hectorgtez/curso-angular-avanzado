@@ -6,7 +6,7 @@ import { GotyComponent } from './pages/goty/goty.component';
 
 const routes: Routes = [
   {
-    path: 'inicio',
+    path: 'home',
     component: InicioComponent
   },
   {
